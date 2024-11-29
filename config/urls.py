@@ -17,10 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from ninja import NinjaAPI
+from ninja.security import HttpBearer
 from accounts.api import router as accounts_router
 from hr.api import router as hr_router
 
-api = NinjaAPI()
+class GlobalAuth(HttpBearer):
+    def authenticate(self, request, token):
+        if token == "supersecret":
+            return token
+
+api = NinjaAPI(auth=GlobalAuth(), csrf=True)  # CSRF保護を有効化
 
 api.add_router("/v1/", accounts_router, tags = ["Test"])
 api.add_router("/v1/", hr_router, tags = ["Hr"])

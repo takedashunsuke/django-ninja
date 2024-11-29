@@ -6,7 +6,7 @@ router = Router()
 class HelloSchema(Schema):
     name: str = "world"
 
-@router.post('/hello')
+@router.post('/hello', auth=None)
 def hello(request, data: HelloSchema):
     return f"Hello {data.name}"
 

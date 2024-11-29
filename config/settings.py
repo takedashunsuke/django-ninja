@@ -67,7 +67,12 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 # 本番環境では、CORS_ALLOWED_ORIGINSを指定する
-# CORS_ALLOWED_ORIGINS = []
+# CORS_ALLOWED_ORIGINS = [
+#     "https://example.com",
+#     "https://sub.example.com",
+#     "http://localhost:8080",
+#     "http://127.0.0.1:9000",
+# ]
 
 ROOT_URLCONF = 'config.urls'
 
@@ -154,6 +159,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ユーザーモデル
 AUTH_USER_MODEL = "accounts.UserAccount"
+
+# CSRF設定
+CSRF_COOKIE_SECURE = True  # HTTPSを使う場合
+CSRF_COOKIE_HTTPONLY = False  # JSでトークンを読み取るため
 
 # # サイト設定
 # SITE_DOMAIN = env("SITE_DOMAIN")
