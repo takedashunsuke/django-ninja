@@ -42,7 +42,7 @@ class UserManager(BaseUserManager):
 class UserAccount(AbstractBaseUser, PermissionsMixin):
     uid = models.CharField("uid", max_length=30, unique=True)
     email = models.EmailField("メールアドレス", max_length=255, unique=True)
-    name = models.CharField("名前", max_length=255)
+    username = models.CharField("名前", max_length=255)
     avatar = models.ImageField(
         upload_to="avatar", verbose_name="プロフィール画像", null=True, blank=True
     )
@@ -57,7 +57,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     # ユーザーマネージャーと認証フィールドの設定
     objects = UserManager()
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["name"]
+    REQUIRED_FIELDS = ["username"]
 
     class Meta:
         verbose_name = "ユーザーアカウント"

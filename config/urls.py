@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from ninja import NinjaAPI
 from accounts.api import router as accounts_router
+from hr.api import router as hr_router
 
 api = NinjaAPI()
 
-api.add_router("/v1/", accounts_router, tags = ["Test"])    # You can add a router as an object
+api.add_router("/v1/", accounts_router, tags = ["Test"])
+api.add_router("/v1/", hr_router, tags = ["Hr"])
 
 urlpatterns = [
     path('admin/', admin.site.urls),

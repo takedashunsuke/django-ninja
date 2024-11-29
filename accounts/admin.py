@@ -13,7 +13,7 @@ class UserAdminCustom(UserAdmin):
             {
                 "fields": (
                     "uid",
-                    "name",
+                    "username",
                     "email",
                     "password",
                     "avatar",
@@ -35,7 +35,7 @@ class UserAdminCustom(UserAdmin):
             {
                 "classes": ("wide",),
                 "fields": (
-                    "name",
+                    "username",
                     "email",
                     "password1",
                     "password2",
@@ -50,7 +50,7 @@ class UserAdminCustom(UserAdmin):
     # 一覧
     list_display = (
         "uid",
-        "name",
+        "username",
         "email",
         "is_active",
         "updated_at",
@@ -66,7 +66,7 @@ class UserAdminCustom(UserAdmin):
     # 順番
     ordering = ("updated_at",)
     # リンク
-    list_display_links = ("uid", "name", "email")
+    list_display_links = ("uid", "username", "email")
     # 編集不可
     readonly_fields = ("updated_at", "created_at", "uid")
 

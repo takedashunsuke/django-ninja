@@ -46,9 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     "accounts",
+    "hr",
     "cloudinary",
     "cloudinary_storage",
     "corsheaders",
+    'ninja',
     'ninja_jwt',
 ]
 
