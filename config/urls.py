@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from ninja import NinjaAPI
 from ninja.security import HttpBearer
+from ninja_jwt.authentication import JWTAuth
 from accounts.api import router as accounts_router
 from hr.api import router as hr_router
 
@@ -26,10 +27,10 @@ class GlobalAuth(HttpBearer):
         if token == "supersecret":
             return token
 
-api = NinjaAPI(auth=GlobalAuth(), csrf=True)  # CSRF保護を有効化
+api = NinjaAPI(auth=JWTAuth(), csrf=True)  # CSRF保護を有効化
 
-api.add_router("/v1/", accounts_router, tags = ["Test"])
-api.add_router("/v1/", hr_router, tags = ["Hr"])
+api.add_router("/v1/auth/", accounts_router, tags = ["Authentication"])
+api.add_router("/v1/hr/", hr_router, tags = ["Hr"])
 
 urlpatterns = [
     path('admin/', admin.site.urls),
