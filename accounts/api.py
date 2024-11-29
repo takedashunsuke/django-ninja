@@ -7,6 +7,6 @@ def hello(request):
     return "Hello world"
 
 
-@router.get('/hello22')
-def hello(request):
-    return "Hello world"
+# @router.get('/hello22')
+# def hello(request):
+#     return "Hello world"

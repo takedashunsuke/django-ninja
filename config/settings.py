@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "cloudinary",
     "cloudinary_storage",
     "corsheaders",
+    'ninja_jwt',
 ]
 
 MIDDLEWARE = [

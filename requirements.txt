@@ -18,11 +18,14 @@ django-cors-headers
 django-cloudinary-storage
 django-environ
 django-ninja
+django-ninja-jwt
 gunicorn
 Pillow
 PyJWT
 python-decouple
 psycopg2-binary
+pydantic
+pydantic-settings
 s3transfer
 sendgrid
 whitenoise

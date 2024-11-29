@@ -21,7 +21,7 @@ from accounts.api import router as accounts_router
 
 api = NinjaAPI()
 
-api.add_router("/test/", accounts_router)    # You can add a router as an object
+api.add_router("/v1/", accounts_router, tags = ["Test"])    # You can add a router as an object
 
 urlpatterns = [
     path('admin/', admin.site.urls),
