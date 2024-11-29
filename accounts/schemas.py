@@ -1,10 +1,10 @@
-from .models import UserAccount
-from ninja import ModelSchema, Schema
+# from .models import UserAccount
+# from ninja import ModelSchema, Schema
 
-class CustomUserSchema(Schema):
-  class Meta:
-    model = UserAccount
-    fields = "__all__"
+# class CustomUserSchema(Schema):
+#   class Meta:
+#     model = UserAccount
+#     fields = "__all__"
 #     # exclude = ['password', 'last_login', 'birth_date']
 
 # class UserIn(Schema):

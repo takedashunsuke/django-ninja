@@ -170,6 +170,16 @@ CSRF_COOKIE_HTTPONLY = False  # JSでトークンを読み取るため
 # SITE_NAME = env("SITE_NAME")
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtpサーバー'
+# EMAIL_HOST_USER = 'デフォルトのEmailアドレス'
+# EMAIL_HOST_PASSWORD = 'メールサーバーのパスワード'
+# EMAIL_PORT = '1025' #メールサーバーで指定されているポート
+# EMAIL_USE_TLS = False # 送信中の文章を暗号化
+# DEFAULT_FROM_EMAIL = '任意のメールアドレス'
+
+FRONTEND_URL = "http://localhost:8000"
 
 NINJA_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),

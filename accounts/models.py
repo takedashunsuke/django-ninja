@@ -1,3 +1,4 @@
+import uuid as uuid_lib
 from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -7,7 +8,6 @@ from django.contrib.auth.models import (
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from hashids import Hashids
-
 
 # カスタムユーザーマネージャークラス
 class UserManager(BaseUserManager):
@@ -40,7 +40,9 @@ class UserManager(BaseUserManager):
 
 # カスタムユーザーアカウントモデル
 class UserAccount(AbstractBaseUser, PermissionsMixin):
-    uid = models.CharField("uid", max_length=30, unique=True)
+    id = models.UUIDField(default=uuid_lib.uuid4,
+                           primary_key=True, editable=False)
+    # uid = models.CharField("uid", max_length=30, unique=True)
     email = models.EmailField("メールアドレス", max_length=255, unique=True)
     username = models.CharField("名前", max_length=255)
     avatar = models.ImageField(
@@ -64,7 +66,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = "ユーザーアカウント"
 
     def __str__(self):
-        return self.name
+        return self.username
 
 
 # アカウントが作成された後に実行されるシグナルレシーバー

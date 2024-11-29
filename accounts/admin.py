@@ -12,7 +12,7 @@ class UserAdminCustom(UserAdmin):
             None,
             {
                 "fields": (
-                    "uid",
+                    "id",
                     "username",
                     "email",
                     "password",
@@ -49,7 +49,7 @@ class UserAdminCustom(UserAdmin):
 
     # 一覧
     list_display = (
-        "uid",
+        "id",
         "username",
         "email",
         "is_active",
@@ -60,15 +60,15 @@ class UserAdminCustom(UserAdmin):
     list_filter = ()
     # 検索
     search_fields = (
-        "uid",
+        "id",
         "email",
     )
     # 順番
     ordering = ("updated_at",)
     # リンク
-    list_display_links = ("uid", "username", "email")
+    list_display_links = ("id", "username", "email")
     # 編集不可
-    readonly_fields = ("updated_at", "created_at", "uid")
+    readonly_fields = ("updated_at", "created_at", "id")
 
 
 admin.site.register(User, UserAdminCustom)
