@@ -13,5 +13,3 @@ python manage.py collectstatic --noinput
 python manage.py migrate
 
 # python manage.py createsuperuser
-# Create superuser with a stronger password
-echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('test@gmail.com', 'test', 'Str0ngP@ssw0rd!2024')" | python manage.py shell
