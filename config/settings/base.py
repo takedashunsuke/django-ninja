@@ -34,10 +34,8 @@ env.read_env(os.path.join(BASE_DIR, ".env"))
 # SECURITY WARNING: don't run with debug turned on in production!
 SECRET_KEY = env('SECRET_KEY')
 # # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG')
-# ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
-ALLOWED_HOSTS = ['*']
-
+DEBUG = env('DEBUG', cast=bool, default=False)
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 # Application definition
 
@@ -226,3 +224,6 @@ NINJA_JWT = {
     'TOKEN_BLACKLIST_INPUT_SCHEMA': "ninja_jwt.schema.TokenBlacklistInputSchema",
     'TOKEN_VERIFY_INPUT_SCHEMA': "ninja_jwt.schema.TokenVerifyInputSchema",
 }
+
+print(f"DEBUG: {DEBUG}")
+print(f"ALLOWED_HOSTS: {ALLOWED_HOSTS}")
