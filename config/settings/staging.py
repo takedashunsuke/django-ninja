@@ -8,12 +8,12 @@ INSTALLED_APPS += [
     'debug_toolbar',
 ]
 
-# SQLite の設定
-default_dburl = "sqlite:///" + str(os.path.join(BASE_DIR) / "db.sqlite3")
-
-# 本場環境では、DATABASE_URLにPostgreSQLのURLを指定する
+# SQLite 設定を引き継ぐ
 DATABASES = {
-    "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    }
 }
 
 STATIC_URL = '/static/'
