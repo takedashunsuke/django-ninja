@@ -4,7 +4,7 @@ from accounts.models import UserAccount
 
 # Create your models here.
 class Department(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, unique=True)
 
 class Employee(models.Model):
     # user = models.OneToOneField(
