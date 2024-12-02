@@ -8,6 +8,10 @@ INSTALLED_APPS += [
     'debug_toolbar',
 ]
 
+DATABASES = {
+    "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
+}
+
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 STATICFILES_DIRS = [
