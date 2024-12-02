@@ -7,13 +7,10 @@ services:
       pip install --upgrade pip
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
-    startCommand: gunicorn mysite.asgi:application -k uvicorn.workers.UvicornWorker
+      python manage.py migrate
+    startCommand: gunicorn config.asgi:application -k uvicorn.workers.UvicornWorker
     envVars:
       - key: SECRET_KEY
         generateValue: true
       - key: DATABASE_URL
         value: sqlite:///db.sqlite3  # SQLite のパスを設定
-    disk: # SQLite の永続ストレージを設定
-      name: sqlite-storage
-      mountPath: /var/lib/db
-      sizeGB: 1
