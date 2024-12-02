@@ -34,8 +34,10 @@ env.read_env(os.path.join(BASE_DIR, ".env"))
 # SECURITY WARNING: don't run with debug turned on in production!
 SECRET_KEY = env('SECRET_KEY')
 # # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG', cast=bool, default=False)
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+DEBUG = env.bool('DEBUG')
+# ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+ALLOWED_HOSTS = ['*']
+
 
 # Application definition
 
@@ -164,6 +166,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ユーザーモデル
 AUTH_USER_MODEL = "accounts.UserAccount"
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # メール認証なし
+
 # CSRF設定
 CSRF_COOKIE_SECURE = True  # HTTPSを使う場合
 CSRF_COOKIE_HTTPONLY = False  # JSでトークンを読み取るため
@@ -224,6 +228,3 @@ NINJA_JWT = {
     'TOKEN_BLACKLIST_INPUT_SCHEMA': "ninja_jwt.schema.TokenBlacklistInputSchema",
     'TOKEN_VERIFY_INPUT_SCHEMA': "ninja_jwt.schema.TokenVerifyInputSchema",
 }
-
-print(f"DEBUG: {DEBUG}")
-print(f"ALLOWED_HOSTS: {ALLOWED_HOSTS}")

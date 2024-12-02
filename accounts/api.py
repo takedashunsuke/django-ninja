@@ -137,6 +137,9 @@ def register(request, payload: SignupSchema):
     
     send_verification_email(user.email, token)
     
+    if settings.DEBUG:
+        return {"message": "仮登録が完了しました。メールをご確認ください"+token}
+
     return {"message": "仮登録が完了しました。メールをご確認ください"}
 
 # メール認証を完了するエンドポイント
