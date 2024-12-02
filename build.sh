@@ -7,9 +7,9 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 # Collect static files (optional, only if needed for production)
-python manage.py collectstatic --settings config.settings.staging --noinput
+python manage.py collectstatic --noinput
 
 # Apply database migrations
-python manage.py migrate --settings config.settings.staging
+python manage.py migrate
 
 # python manage.py createsuperuser
