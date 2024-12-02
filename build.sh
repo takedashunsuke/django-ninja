@@ -1,6 +1,6 @@
 #!/bin/bash
 # Set the Django settings module to staging
-export DJANGO_SETTINGS_MODULE=config.settings.staging
+# export DJANGO_SETTINGS_MODULE=config.settings.staging
 
 # Install dependencies
 pip install --upgrade pip
