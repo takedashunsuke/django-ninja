@@ -4,6 +4,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+ROOT_URLCONF = 'config.urls'
+
 # SQLite 設定を引き継ぐ
 DATABASES = {
     "default": {
