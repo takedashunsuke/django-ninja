@@ -20,11 +20,12 @@ from dj_database_url import parse as dburl
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 PROJECT_NAME = os.path.basename(BASE_DIR)
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, ".env"))
 
+# print(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -32,11 +33,12 @@ env.read_env(os.path.join(BASE_DIR, ".env"))
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-)-3mh2axd^bm*r2q$)=+pt@p53+fwlb-e!9e%yz#xwd7ohqtsm'
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
+# ALLOWED_HOSTS = ['*']
 SECRET_KEY = env('SECRET_KEY')
 # # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG')
-# ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -48,7 +50,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     "accounts",
     "hr",
     "cloudinary",
@@ -104,10 +105,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 default_dburl = "sqlite:///" + str(BASE_DIR / "db.sqlite3")
 
-# 本場環境では、DATABASE_URLにPostgreSQLのURLを指定する
-DATABASES = {
-    "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
-}
+# # 本場環境では、DATABASE_URLにPostgreSQLのURLを指定する
+# DATABASES = {
+#     "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
+# }
 
 # DATABASES = {
 #     'default': {
@@ -152,11 +153,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = str(BASE_DIR / "staticfiles")
-# STATIC_ROOT = '/var/www/{}/static'.format(PROJECT_NAME)
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATIC_ROOT = str(BASE_DIR / "staticfiles")
+STATIC_ROOT = '/var/www/{}/static'.format(PROJECT_NAME)
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_URL = "/media/"
+
+# テスト環境
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 追加
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -166,8 +171,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ユーザーモデル
 AUTH_USER_MODEL = "accounts.UserAccount"
 
-ACCOUNT_EMAIL_VERIFICATION = 'none'  # メール認証なし
-
 # CSRF設定
 CSRF_COOKIE_SECURE = True  # HTTPSを使う場合
 CSRF_COOKIE_HTTPONLY = False  # JSでトークンを読み取るため
@@ -175,7 +178,6 @@ CSRF_COOKIE_HTTPONLY = False  # JSでトークンを読み取るため
 # # サイト設定
 # SITE_DOMAIN = env("SITE_DOMAIN")
 # SITE_NAME = env("SITE_NAME")
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -188,43 +190,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 FRONTEND_URL = "http://localhost:8000"
 
-NINJA_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False,
-    'UPDATE_LAST_LOGIN': False,
 
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': settings.SECRET_KEY,
-    'VERIFYING_KEY': None,
-    'AUDIENCE': None,
-    'ISSUER': None,
-    'JWK_URL': None,
-    'LEEWAY': 0,
-
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
-    'USER_AUTHENTICATION_RULE': 'ninja_jwt.authentication.default_user_authentication_rule',
-
-    'AUTH_TOKEN_CLASSES': ('ninja_jwt.tokens.AccessToken',),
-    'TOKEN_TYPE_CLAIM': 'token_type',
-    'TOKEN_USER_CLASS': 'ninja_jwt.models.TokenUser',
-
-    'JTI_CLAIM': 'jti',
-
-    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
-
-    # For Controller Schemas
-    # FOR OBTAIN PAIR
-    'TOKEN_OBTAIN_PAIR_INPUT_SCHEMA': "ninja_jwt.schema.TokenObtainPairInputSchema",
-    'TOKEN_OBTAIN_PAIR_REFRESH_INPUT_SCHEMA': "ninja_jwt.schema.TokenRefreshInputSchema",
-    # FOR SLIDING TOKEN
-    'TOKEN_OBTAIN_SLIDING_INPUT_SCHEMA': "ninja_jwt.schema.TokenObtainSlidingInputSchema",
-    'TOKEN_OBTAIN_SLIDING_REFRESH_INPUT_SCHEMA':"ninja_jwt.schema.TokenRefreshSlidingInputSchema",
-
-    'TOKEN_BLACKLIST_INPUT_SCHEMA': "ninja_jwt.schema.TokenBlacklistInputSchema",
-    'TOKEN_VERIFY_INPUT_SCHEMA': "ninja_jwt.schema.TokenVerifyInputSchema",
-}
