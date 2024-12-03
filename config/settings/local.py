@@ -11,6 +11,9 @@ DATABASES = {
     "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
 }
 
+STATIC_URL = 'static/'
+# STATIC_ROOT = str(BASE_DIR / "staticfiles")
+STATIC_ROOT = '/var/www/{}/static'.format(PROJECT_NAME)
 
 NINJA_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
